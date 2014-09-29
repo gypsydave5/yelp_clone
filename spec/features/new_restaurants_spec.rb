@@ -7,10 +7,17 @@ describe 'adding a new restaurant' do
       expect(page).to have_content "Add new restaurant"
     end
 
-    it 'should have a form to input both restaurant name and cuisine' do
+    it 'should have a form to input both restaurant name' do
       visit 'restaurants/new'
       expect(page).to have_field 'Restaurant name'
-      expect(page).to have_field 'Type of cuisine'
     end
+  end
+
+  it 'should be able to create a new restaurantt' do
+    visit 'restaurants/new'
+    fill_in "Restaurant name", with: 'KFC'
+    click_button 'Create Restaurant'
+    expect(page).to have_content 'KFC'
+    expect(current_path).to eq '/restaurants'
   end
 end

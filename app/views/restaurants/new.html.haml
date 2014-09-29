@@ -1,9 +1,10 @@
 %h1 Add new restaurant
 =form_for @restaurant do |form|
-  =form.label :name, "Restaurant name:", class:"restaurant_name"
+  =form.label :name, "Restaurant name"
   =form.text_field :name
-
-  -#-form.label :cuisine
-  -#-form.text_field :cuisine
+  -#=form.label :cuisine
+  -#=form.text_field :cuisine
+  -#=form.label :description
+  -#=form.text_field :description
 
   =form.submit
