@@ -74,5 +74,14 @@ describe 'getting a restaurants details' do
     end
     expect(page).to have_content("Finger lickin' goodness from an old man with a box full of greasy bones.")
   end
+
+  it 'can navigate back to the restaurants list' do
+    visit '/restaurants'
+    within('h2') do
+      click_link 'KFC'
+    end
+    click_link 'Return to restaurants list'
+    expect(current_path).to eq '/restaurants'
+  end
 end
 
