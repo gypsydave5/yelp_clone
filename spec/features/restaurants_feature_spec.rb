@@ -20,4 +20,12 @@ describe 'restaurants' do
       expect(page).not_to have_content('No restaurants yet')
     end
   end
+
+  context "adding new restaurants" do
+    it "should have a page to add a new restuarant" do
+      visit '/restaurants'
+      click_on 'Add a restaurant'
+      expect(current_path).to eq '/restaurants/new'
+    end
+  end
 end
