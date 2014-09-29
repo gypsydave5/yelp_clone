@@ -62,3 +62,17 @@ describe 'deleting a restaurant' do
   end
 end
 
+describe 'getting a restaurants details' do
+  before do
+    Restaurant.create(name: 'KFC', description: "Finger lickin' goodness from an old man with a box full of greasy bones.")
+  end
+
+  it 'can display a detailed view of the restaurant' do
+    visit '/restaurants'
+    within('h2') do
+      click_link 'KFC'
+    end
+    expect(page).to have_content("Finger lickin' goodness from an old man with a box full of greasy bones.")
+  end
+end
+

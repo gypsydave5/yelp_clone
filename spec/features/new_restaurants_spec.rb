@@ -13,9 +13,18 @@ describe 'adding a new restaurant' do
     end
   end
 
-  it 'should be able to create a new restaurantt' do
+  it 'should be able to create a new restaurant' do
     visit 'restaurants/new'
     fill_in "Restaurant name", with: 'KFC'
+    click_button 'Create Restaurant'
+    expect(page).to have_content 'KFC'
+    expect(current_path).to eq '/restaurants'
+  end
+
+  it 'can create a new restaurant with a description' do
+    visit 'restaurants/new'
+    fill_in "Restaurant name", with: 'KFC'
+    fill_in "Description", with: 'Chicken cottage wannabe. Got for the tower zinger burger'
     click_button 'Create Restaurant'
     expect(page).to have_content 'KFC'
     expect(current_path).to eq '/restaurants'

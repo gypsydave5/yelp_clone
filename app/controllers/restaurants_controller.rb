@@ -29,4 +29,8 @@ class RestaurantsController < ApplicationController
     flash[:notice] = 'Restaurant deleted successfully'
     redirect_to restaurants_path
   end
+
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
 end
