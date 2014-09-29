@@ -49,3 +49,16 @@ describe 'editing restaurants' do
   end
 end
 
+describe 'deleting a restaurant' do
+  before do
+    Restaurant.create(name: 'KFC')
+  end
+
+  it 'removes a restaurant when a user clicks a delete link' do
+    visits '/restaurants'
+    click_link 'Delete KFC'
+    expect(page).not_to have_content 'KFC'
+    expect(page).to have_content 'Restaurant deleted successfully'
+  end
+end
+
