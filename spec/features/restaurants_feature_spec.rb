@@ -33,3 +33,19 @@ describe 'restaurants' do
 
   end
 end
+
+describe 'editing restaurants' do
+  before do
+    Restaurant.create(name: 'KFC')
+  end
+
+  it "allows a user to edit a restaurant" do
+    visit '/restaurants'
+    click_link 'Edit KFC'
+    fill_in 'Name', with: 'Kentucky Fried Chicken'
+    click 'Update Restaurant'
+    expect(page).to have_content 'Kentucky Fried Chicken'
+    expect(current_path).to eq '/restaurants'
+  end
+end
+
