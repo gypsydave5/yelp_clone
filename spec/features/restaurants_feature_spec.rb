@@ -55,7 +55,7 @@ describe 'deleting a restaurant' do
   end
 
   it 'removes a restaurant when a user clicks a delete link' do
-    visits '/restaurants'
+    visit '/restaurants'
     click_link 'Delete KFC'
     expect(page).not_to have_content 'KFC'
     expect(page).to have_content 'Restaurant deleted successfully'
