@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 describe 'restaurants' do
+  before :each do
+    visit '/restaurants'
+  end
+
   context 'no restaurants have been added' do
     it 'should display a prompt to add a restaurant' do
-      visit '/restaurants'
       expect(page).to have_content 'No restaurants yet'
       expect(page).to have_link 'Add a restaurant'
     end
@@ -24,7 +27,6 @@ describe 'restaurants' do
   context "adding new restaurants" do
 
     it "should have a page to add a new restuarant" do
-      visit '/restaurants'
       click_on 'Add a restaurant'
       expect(current_path).to eq '/restaurants/new'
     end

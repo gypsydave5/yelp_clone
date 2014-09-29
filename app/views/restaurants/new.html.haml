@@ -1,2 +1,9 @@
--form_tag("/restaurants/new", method: "POST") do
-  -label_tag(:name, "Restaurant Name")
+%h1 Add new restaurant
+=form_for @restaurant do |form|
+  =form.label :name, "Restaurant name:", class:"restaurant_name"
+  =form.text_field :name
+
+  -#-form.label :cuisine
+  -#-form.text_field :cuisine
+
+  =form.submit
