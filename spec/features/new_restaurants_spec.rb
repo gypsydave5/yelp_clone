@@ -13,32 +13,26 @@ describe 'adding a new restaurant' do
     end
   end
 
-  it 'should be able to create a new restaurant' do
-    visit 'restaurants/new'
-    fill_in "Restaurant name", with: 'KFC'
-    click_button 'Create Restaurant'
-    expect(page).to have_content 'KFC'
-    expect(current_path).to eq '/restaurants'
+  context 'valid restaurant' do
+    it 'should be able to create a new restaurant' do
+      visit 'restaurants/new'
+      fill_in "Restaurant name", with: 'KFC'
+      fill_in "Description", with: 'Chicken cottage wannabe. Go for the tower zinger burger'
+      fill_in "Cuisine", with: 'Chicken'
+      click_button 'Create Restaurant'
+      expect(page.find('h2')).to have_content 'KFC'
+      expect(page.find('.cuisine')).to have_content 'Chicken'
+      expect(current_path).to eq '/restaurants'
+    end
   end
 
-  it 'can create a new restaurant with a description' do
-    visit 'restaurants/new'
-    fill_in "Restaurant name", with: 'KFC'
-    fill_in "Description", with: 'Chicken cottage wannabe. Got for the tower zinger burger'
-    click_button 'Create Restaurant'
-    expect(page).to have_content 'KFC'
-    expect(current_path).to eq '/restaurants'
-  end
-
-  it 'can add a new restaurant with a description and a cuisine type' do
-    visit 'restaurants/new'
-    fill_in "Restaurant name", with: 'KFC'
-    fill_in "Description", with: 'Chicken cottage wannabe. Go for the tower zinger burger'
-    fill_in "Cuisine", with: 'Chicken'
-    click_button 'Create Restaurant'
-    expect(page.find('h2')).to have_content 'KFC'
-    #expect(page.find('.description')).to have_content 'Chicken cottage wannabe. Go for the tower zinger burger'
-    expect(page.find('.cuisine')).to have_content 'Chicken'
-    expect(current_path).to eq '/restaurants'
+  context 'an invalid restaurant' do
+    it 'does not let you submit a name that is too short' do
+      visit '/restaurants/new'
+      fill_in 'Restaurant name', with: 'kf'
+      click_button 'Create Restaurant'
+      expect(page).not_to have_css 'h2', text: 'kf'
+      expect(page).to have_content 'error'
+    end
   end
 end

@@ -19,7 +19,7 @@ describe 'reviewing things' do
 
   context 'changing reviews' do
     before do
-      kfc = Restaurant.create(name: 'KFC')
+      kfc = Restaurant.find_by(name: 'KFC')
       Review.create(comments:"Love KFC", rating: 5, restaurant_id: kfc.id )
     end
     it 'allows you to edit reviews' do
