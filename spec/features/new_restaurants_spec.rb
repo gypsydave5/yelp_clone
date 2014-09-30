@@ -23,6 +23,10 @@ describe 'adding a new restaurant' do
       expect(page.find('h2')).to have_content 'KFC'
       expect(page.find('.cuisine')).to have_content 'Chicken'
       expect(current_path).to eq '/restaurants'
+      within 'h2' do
+        click_link 'KFC'
+      end
+      expect(page).to have_content 'Chicken cottage wannabe. Go for the tower zinger burger'
     end
   end
 
