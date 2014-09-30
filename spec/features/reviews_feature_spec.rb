@@ -16,4 +16,21 @@ describe 'reviewing things' do
     expect(page.find('.review')).to have_content "It's alright"
     expect(page.find('.rating')).to have_content "3"
   end
+
+  context 'changing reviews' do
+    before do
+      kfc = Restaurant.create(name: 'KFC')
+      Review.create(comments:"Love KFC", rating: 5, restaurant_id: kfc.id )
+    end
+    it 'allows you to edit reviews' do
+      visit '/restaurants'
+      expect(page.find('.review')).to have_content "Love KFC"
+      click_link 'Edit review'
+      fill_in "Comments", with: "It's alright"
+      select '3', from: 'Rating'
+      click_button 'Submit Review'
+      expect(page.find('.review')).to have_content "It's alright"
+      expect(page.find('.rating')).to have_content "3"
+    end
+  end
 end
