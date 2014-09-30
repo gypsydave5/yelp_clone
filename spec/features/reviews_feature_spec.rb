@@ -2,15 +2,12 @@ require 'rails_helper'
 
 describe 'reviewing things' do
 
-  before :each do
-    visit '/restaurants'
-  end
-
   before do
     Restaurant.create(name: 'KFC')
   end
 
   it 'allows users to leave reviews using the form which appears alongside restaurants' do
+    visit '/restaurants'
     click_link 'Review KFC'
     fill_in "comments", with: "It's alright"
     select '3', from: 'Rating'
