@@ -9,7 +9,7 @@ describe 'reviewing things' do
   it 'allows users to leave reviews using the form which appears alongside restaurants' do
     visit '/restaurants'
     click_link 'Review KFC'
-    fill_in "comments", with: "It's alright"
+    fill_in "Comments", with: "It's alright"
     select '3', from: 'Rating'
     click_button 'Submit Review'
     expect(current_path).to eq '/restaurants'
