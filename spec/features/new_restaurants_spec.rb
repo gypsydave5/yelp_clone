@@ -29,4 +29,16 @@ describe 'adding a new restaurant' do
     expect(page).to have_content 'KFC'
     expect(current_path).to eq '/restaurants'
   end
+
+  it 'can add a new restaurant with a description and a cuisine type' do
+    visit 'restaurants/new'
+    fill_in "Restaurant name", with: 'KFC'
+    fill_in "Description", with: 'Chicken cottage wannabe. Go for the tower zinger burger'
+    fill_in "Cuisine", with: 'Chicken'
+    click_button 'Create Restaurant'
+    expect(page.find('h2')).to have_content 'KFC'
+    #expect(page.find('.description')).to have_content 'Chicken cottage wannabe. Go for the tower zinger burger'
+    expect(page.find('.cuisine')).to have_content 'Chicken'
+    expect(current_path).to eq '/restaurants'
+  end
 end
