@@ -7,11 +7,7 @@ describe 'reviewing things' do
   end
 
   it 'allows users to leave reviews using the form which appears alongside restaurants' do
-    visit '/restaurants'
-    click_link 'Review KFC'
-    fill_in "Comments", with: "It's alright"
-    select '3', from: 'Rating'
-    click_button 'Submit Review'
+    leave_review("KFC", "It's alright", 3)
     expect(current_path).to eq '/restaurants'
     expect(page.find('.review')).to have_content "It's alright"
     expect(page.find('.rating')).to have_content "3"
@@ -19,8 +15,7 @@ describe 'reviewing things' do
 
   context 'changing reviews' do
     before do
-      kfc = Restaurant.find_by(name: 'KFC')
-      Review.create(comments:"Love KFC", rating: 5, restaurant_id: kfc.id )
+      leave_review("KFC","Love KFC", 5)
     end
     it 'allows you to edit reviews' do
       visit '/restaurants'
@@ -33,4 +28,13 @@ describe 'reviewing things' do
       expect(page.find('.rating')).to have_content "3"
     end
   end
+
+  def leave_review(restaurant, comments, rating)
+    visit '/restaurants'
+    click_link "Review #{restaurant}"
+    fill_in "Comments", with: comments
+    select rating, from: "Rating"
+    click_button "Submit Review"
+  end
+
 end

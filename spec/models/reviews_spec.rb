@@ -13,4 +13,9 @@ RSpec.describe Review, :type => :model do
     review = Review.new(rating: 0, comments: "Mwahahahaaaa!", restaurant_id: restaurant.id)
     expect(review).to have(1).error_on(:rating)
   end
+
+  it 'Will accept valid ratings' do
+    review = Review.new(rating: 3, comments: "S'alright", restaurant_id: restaurant.id)
+    expect(review).to be_valid
+  end
 end
