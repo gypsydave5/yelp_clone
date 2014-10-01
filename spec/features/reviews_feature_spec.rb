@@ -6,6 +6,8 @@ describe 'reviewing things' do
     Restaurant.create(name: 'KFC')
   end
 
+  let(:kfc) {Restaurant.find_by(name: "KFC")}
+
   it 'allows users to leave reviews using the form which appears alongside restaurants' do
     leave_review("KFC", "It's alright", 3)
     expect(current_path).to eq '/restaurants'
@@ -32,7 +34,17 @@ describe 'reviewing things' do
   it 'displays an average rating for all reviews' do
     leave_review("KFC", "So so", "1")
     leave_review("KFC", "Great", "5")
-    expect(page.find('.average_rating')).to have_content("Average rating: ★★★☆☆")
+    expect(page.find('.average_rating')).to have_content("Average rating: ★★★☆☆☆")
+  end
+
+  context "showing time since creation" do
+    before do
+      Review.create(comments: "Hi", rating: 3, restaurant_id: kfc.id, created_at: (Time.now - 120))
+    end
+    it 'displays the time that has passed since the review was posted' do
+      visit '/restaurants'
+      expect(page.find('.time_since')).to have_content("2 minutes")
+    end
   end
 
   def leave_review(restaurant, comments, rating)
