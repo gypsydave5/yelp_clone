@@ -1,0 +1,23 @@
+//# Place all the behaviors and hooks related to the matching controller here.
+//# All this logic will automatically be available in application.js.
+//# You can use CoffeeScript in this file: http://coffeescript.org/
+//#
+
+
+//$(document).ready ->
+    //$('.endorsements_link').on 'click', (event)->
+        //event.preventDefault()
+        //endorsementCount = $(@).siblings '.endorsements'
+        //link = @.href
+        //$.post link, (response)->
+            //endorsementCount.text response.new_endorsements_count
+
+$(document).ready(function(){
+  $('.endorsements_link').on('click', function(event){
+    var endorsementCount = $(this).siblings('.endorsements');
+    event.preventDefault();
+    $.post(this.href, function(response){
+      $(endorsementCount).text(response.new_endorsement_count);
+    });
+  })
+})
