@@ -36,9 +36,7 @@ RSpec.describe Restaurant, :type => :model do
         restaurant.reviews.create(rating: 4)
         expect(restaurant.average_rating).to eq 3
       end
-
-
     end
-  end
 
+  end
 end
