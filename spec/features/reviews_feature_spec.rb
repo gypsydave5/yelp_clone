@@ -30,9 +30,9 @@ describe 'reviewing things' do
   end
 
   it 'displays an average rating for all reviews' do
-    leave_review("KFC", "So so", "3")
+    leave_review("KFC", "So so", "1")
     leave_review("KFC", "Great", "5")
-    expect(page.find('.average_rating')).to have_content("Average rating: 4")
+    expect(page.find('.average_rating')).to have_content("Average rating: ★★★☆☆")
   end
 
   def leave_review(restaurant, comments, rating)
