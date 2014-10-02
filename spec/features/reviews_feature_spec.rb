@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'helper_methods'
 
 describe 'reviewing things' do
 
@@ -8,28 +9,40 @@ describe 'reviewing things' do
 
   let(:kfc) {Restaurant.find_by(name: "KFC")}
 
-  it 'allows users to leave reviews using the form which appears alongside restaurants' do
-    leave_review("KFC", "It's alright", 3)
-    expect(current_path).to eq '/restaurants'
-    expect(page.find('.review')).to have_content "It's alright"
-    expect(page.find('.rating')).to have_content "3"
-  end
+  context "when logged in" do
 
-  context 'changing reviews' do
     before do
-      leave_review("KFC","Love KFC", 5)
+      sign_up("dave@dave.com", "12345678")
+      let(:user) {User.find_by(email: "dave@dave.com")}
     end
-    it 'allows you to edit reviews' do
-      visit '/restaurants'
-      expect(page.find('.review')).to have_content "Love KFC"
-      click_link 'Edit review'
-      fill_in "Comments", with: "It's alright"
-      select '3', from: 'Rating'
-      click_button 'Submit Review'
-      expect(page.find('.review')).to have_content "It's alright"
-      expect(page.find('.rating')).to have_content "3"
+
+    context "creating reviews" do
+      it 'allows users to leave reviews using the form which appears alongside restaurants' do
+        leave_review("KFC", "It's alright", 3)
+        expect(current_path).to eq '/restaurants'
+        expect(page.find('.review')).to have_content "It's alright"
+        expect(page.find('.rating')).to have_content "3"
+      end
+
     end
-  end
+
+    context 'changing reviews' do
+
+      before do
+        leave_review("KFC","Love KFC", 5)
+      end
+
+      it 'allows you to edit reviews you have made' do
+        visit '/restaurants'
+        expect(page.find('.review')).to have_content "Love KFC"
+        click_link 'Edit review'
+        fill_in "Comments", with: "It's alright"
+        select '3', from: 'Rating'
+        click_button 'Submit Review'
+        expect(page.find('.review')).to have_content "It's alright"
+        expect(page.find('.rating')).to have_content "3"
+      end
+    end
 
   it 'displays an average rating for all reviews' do
     leave_review("KFC", "So so", "1")
@@ -45,14 +58,6 @@ describe 'reviewing things' do
       visit '/restaurants'
       expect(page.find('.time_since')).to have_content("2 minutes")
     end
-  end
-
-  def leave_review(restaurant, comments, rating)
-    visit '/restaurants'
-    click_link "Review #{restaurant}"
-    fill_in "Comments", with: comments
-    select rating, from: "Rating"
-    click_button "Submit Review"
   end
 
 end

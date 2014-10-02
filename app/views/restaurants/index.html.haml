@@ -13,7 +13,7 @@
         %p.rating #{review.rating}
         %p.time_since #{time_ago_in_words(review.created_at)}
         =link_to "Endorse", review_endorsements_path(review), class: "endorsements_link"
-        %p.endorsements Endorsements: #{review.endorsements.count}
+        %p.endorsements #{pluralize(review.endorsements.count, 'endorsement')}
         =link_to("Edit review", edit_restaurant_review_path(restaurant,review))
     - else
       %p No reviews yet

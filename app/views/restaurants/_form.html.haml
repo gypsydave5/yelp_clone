@@ -7,11 +7,12 @@
         %li
           = message
 
-=form_for @restaurant do |form|
+=form_for @restaurant, html: { multipart: true } do |form|
   =form.label :name, "Restaurant name"
   =form.text_field :name
   =form.label :cuisine
   =form.text_field :cuisine
   =form.label :description
   =form.text_field :description
+  =form.file_field :image
   =form.submit

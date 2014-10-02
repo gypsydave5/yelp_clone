@@ -10,7 +10,7 @@ describe 'endorsing reviews' do
     visit '/restaurants'
     click_link 'Endorse'
     within '.endorsements' do
-      expect(page).to have_content("Endorsement: 1")
+      expect(page).to have_content("1 endorsement")
     end
   end
   it 'Changes Endorsement to Endorsements when plural', js: true do
@@ -18,7 +18,7 @@ describe 'endorsing reviews' do
     click_link 'Endorse'
     click_link 'Endorse'
     within '.endorsements' do
-      expect(page).to have_content("Endorsements: 2")
+      expect(page).to have_content("2 endorsements")
     end
   end
 end
