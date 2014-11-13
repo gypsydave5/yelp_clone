@@ -7,9 +7,9 @@ Y(h)elp!
 ####Overview
 
 A clone of the popular services locator [Yelp](http://www.yelp.co.uk/), created
-as a part of the intensive weeks 9 & 10 [Rails] part of te course at [Makers
+as a part of the intensive weeks 9 & 10 [Rails] part of the course at [Makers
 Academy]. We not only learned to find our way around a Rails project, we also
-applied more of the [JavaScript] we learned to create [Ajax] calls.
+applied more of the [JavaScript] we learned in order to create [Ajax] calls.
 
 ####User experience
 
@@ -21,7 +21,6 @@ Reviews may be added, and may be endorsed by other users.
 
 + Production
   + [Ajax]
-  + [bcrypt]
   + [CSS]
   + [devise]
   + [Haml]
